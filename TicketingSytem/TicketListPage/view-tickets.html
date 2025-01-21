@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Tickets</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+
+  <div class="max-w-6xl mx-auto p-6">
+
+    <!-- Header with Logout Button -->
+    <div class="flex justify-between items-center mb-8">
+      <div>
+        <h1 class="text-4xl font-bold text-gray-100">Tickets</h1>
+        <p class="text-xl text-gray-400">Here are the tickets</p>
+      </div>
+
+      <!-- Logout Button -->
+      <button 
+        onclick="logout()" 
+        class="py-2 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-200"
+      >
+        Logout
+      </button>
+    </div>
+
+    <!-- Search Bar Section -->
+    <div class="relative w-full max-w-md mx-auto mb-6">
+      <input
+        type="text"
+        id="search-bar"
+        class="w-full py-2 pl-10 pr-4 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400"
+        placeholder="Search tickets..."
+        oninput="handleSearch()"
+      />
+    </div>
+
+    <!-- Bulk Action Section -->
+    <div class="flex justify-between items-center mb-4">
+      <button
+        id="resolve-selected"
+        onclick="resolveSelected()"
+        class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 disabled:opacity-50"
+        disabled
+      >
+        Resolve Selected
+      </button>
+
+   <!-- Create New Ticket Button -->
+   <div class="flex justify-center mb-1">
+    <button
+      onclick="window.location.href = '../TicketPage/ticketing.html';"
+      class="py-2 px-2 bg-indigo-700 text-white rounded-lg hover:bg-indigo-700 transition duration-200"
+    >Create New Ticket
+    </button>
+  </div>
+
+
+
+      <button
+        id="delete-selected"
+        onclick="deleteSelected()"
+        class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 disabled:opacity-50"
+        disabled
+      >
+        Delete Selected
+      </button>
+    </div>
+
+    <!-- Tickets Table Section -->
+    <div class="overflow-x-auto bg-gray-800 p-6 rounded-lg shadow-xl">
+      <table class="min-w-full table-auto text-left text-gray-200">
+        <thead>
+          <tr class="bg-gray-700">
+            <th class="py-3 px-6">
+              <input type="checkbox" id="select-all" onclick="toggleSelectAll()">
+            </th>
+            <th class="py-3 px-6 font-semibold">Title</th>
+            <th class="py-3 px-6 font-semibold">Description</th>
+            <th class="py-3 px-6 font-semibold">Priority</th>
+            <th class="py-3 px-6 font-semibold">Status</th>
+          </tr>
+        </thead>
+        <tbody id="ticket-items">
+          <!-- Tickets will be dynamically rendered here -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination Section -->
+<div id="pagination" class="flex justify-center mt-4">
+    <!-- Pagination buttons will be dynamically added here -->
+  </div>
+
+
+ 
+
+  </div>
+
+  <!-- Link to the External JavaScript File -->
+  <script src="view-tickets.js"></script>
+
+</body>
+</html>

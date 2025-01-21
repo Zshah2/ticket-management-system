@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Ticket</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+
+  <div class="max-w-6xl mx-auto p-6">
+
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-100">Create a New Ticket</h1>
+      <p class="text-xl text-gray-400">Fill out the form to create a new ticket</p>
+    </div>
+
+    <!-- Create Ticket Form -->
+    <div class="bg-gray-800 p-6 rounded-lg shadow-xl mb-10 w-full max-w-3xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-4 text-center text-gray-100">Ticket Details</h2>
+
+      <form id="ticket-form">
+        <div class="mb-4">
+          <label for="ticket-title" class="block text-sm font-medium text-gray-400">Title</label>
+          <input
+            type="text"
+            id="ticket-title"
+            class="mt-2 p-2 w-full bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400"
+            placeholder="Ticket title"
+            required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="ticket-description" class="block text-sm font-medium text-gray-400">Description</label>
+          <textarea
+            id="ticket-description"
+            class="mt-2 p-2 w-full bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400"
+            rows="3"
+            placeholder="Describe your issue..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="mb-4">
+          <label for="ticket-priority" class="block text-sm font-medium text-gray-400">Priority</label>
+          <select
+            id="ticket-priority"
+            class="mt-2 p-2 w-full bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-400"
+            required
+          >
+            <option value="" disabled selected>Select priority</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-200"
+        >
+          Create Ticket
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+  <script>
+    // Function to handle ticket submission
+    document.getElementById('ticket-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Retrieve the values from the form
+      const title = document.getElementById('ticket-title').value;
+      const description = document.getElementById('ticket-description').value;
+      const priority = document.getElementById('ticket-priority').value;
+
+      // Create a new ticket object
+      const newTicket = {
+        title,
+        description,
+        priority,
+        status: 'open' // Default status is open
+      };
+
+      // Get existing tickets from localStorage or initialize an empty array
+      const tickets = JSON.parse(localStorage.getItem('tickets')) || [];
+
+      // Add the new ticket to the array
+      tickets.push(newTicket);
+
+      // Store the updated ticket list in localStorage
+      localStorage.setItem('tickets', JSON.stringify(tickets));
+
+      // Redirect to the View Tickets page
+      window.location.href = '../TicketListPage/view-tickets.html';
+    });
+  </script>
+
+</body>
+</html>
